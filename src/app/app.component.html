@@ -1,0 +1,58 @@
+<div class="main">
+  <header>
+    <div class="header">
+      <div class="header__button">
+        <button class="run-button" (click)="run()">Run</button>
+        <select class="select-theme" [(ngModel)]="selectedTheme" (change)="changeTheme($event)">
+          <option *ngFor="let theme of themes" [value]="theme.value">{{theme.name}}</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="content" [ngClass]="{'dark': selectedTheme === 'vs-dark','black': selectedTheme === 'hc-black'}">
+    <div id="code-editor" style="width: 50%;">
+      <div>
+        <div class="title">JavaScipt</div>
+        <ngx-monaco-editor style="height: calc(50vh - 60px);" [options]="editorOptions" [(ngModel)]="code"
+          (onInit)="onInit($event)">
+        </ngx-monaco-editor>
+      </div>
+      <div>
+        <div class="title">HTML</div>
+        <ngx-monaco-editor style="height: calc(50vh - 60px);" [options]="editorOptionsHTML" [(ngModel)]="htmlCode"
+          (onInit)="onInit($event)">
+        </ngx-monaco-editor>
+      </div>
+    </div>
+
+    <div id="result">
+      <div class="title">CSS</div>
+      <ngx-monaco-editor style="height: calc(50vh - 60px);" [options]="editorOptionsCSS" [(ngModel)]="cssCode"
+        (onInit)="onInit($event)">
+      </ngx-monaco-editor>
+      <div class="title">Result</div>
+
+      <div id="html-result">
+
+      </div>
+
+
+      <div class="console_wrapper">
+        <div class="console-action">
+          <div class="title" (click)="toggleConsole()">Console({{finalMsg.length}})</div>
+          <div style="cursor: pointer;padding-right: 20px;" (click)="clearConsole()">Clear</div>
+        </div>
+        <p *ngFor="let m of finalMsg">
+          <span>> {{m | json}}</span>
+        </p>
+      </div>
+
+
+
+    </div>
+    <div>
+
+    </div>
+  </div>
+</div>
